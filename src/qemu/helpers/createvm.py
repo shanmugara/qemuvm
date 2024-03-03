@@ -36,7 +36,7 @@ class Create(object):
         if not os.path.isfile(self.src_img):
             raise FileNotFoundError(f"File:{self.src_img}")
 
-        self.dst_img = os.path.join(self.img_dir, f"{self.vm.name}.qcpow2")
+        self.dst_img = os.path.join(self.img_dir, f"{self.vm.name}.qcow2")
 
         if os.path.isfile(self.dst_img):
             raise DestImageExists
@@ -63,7 +63,7 @@ class Create(object):
         for n in self.vm.nics:
             network += f"--network bridge={n.bridge},model={n.type} "
 
-        self.cmd = (f"virt-install --name {self.vm.name} --ram {self.vm.memory} --vcpus {self.vm.cpus} "
+        self.cmd = (f"sudo virt-install --name {self.vm.name} --ram {self.vm.memory} --vcpus {self.vm.cpus} "
                     f"--os-variant {self.vm.ostype} --disk {self.dst_img},bus={self.vm.diskbus} "
                     f"{network} {self.graphics} --import --noautoconsole")
 
