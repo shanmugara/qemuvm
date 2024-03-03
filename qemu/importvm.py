@@ -97,6 +97,7 @@ class Import(object):
             cmd_out = check_output([self.cmd], shell=True, stderr=DEVNULL).decode().strip()
             print(cmd_out)
         except Exception as e:
+            print(f"error {e}")
             raise e
 
 
