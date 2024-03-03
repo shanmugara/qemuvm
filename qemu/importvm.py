@@ -90,7 +90,7 @@ class Import(object):
         if self.ostype.startswith("win"):
             self.graphics = "--graphics vnc,listen=127.0.0.1,keymap=en-us"
         else:
-            self.graphics = ""
+            self.graphics = "--graphics spice"
 
     def commmit(self):
         try:
