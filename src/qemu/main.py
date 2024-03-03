@@ -5,7 +5,8 @@ import os
 app_root = os.path.split(os.path.abspath(__file__))[0]
 sys.path.insert(0, app_root)
 
-from qemu import importvm
+from qemu.helpers import importvm
+
 
 def main():
     parser = argparse.ArgumentParser(description="QEMU lib")
@@ -22,3 +23,7 @@ def main():
         importer = importvm.Import(args.xmlfile, args.diskimage, args.osvariant)
         importer.startimport()
         importer.commmit()
+
+if __name__ == "__main__":
+    main()
+
