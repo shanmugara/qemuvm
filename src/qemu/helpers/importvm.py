@@ -4,10 +4,11 @@ import os.path
 import xmltodict
 from subprocess import check_output, DEVNULL, STDOUT
 from qemu.helpers.common_cls import Vm, Nic
-
-FileNotFound = Exception("File Not Found")
-InvalidOSType = Exception("Invalid OS variant was passed")
-CmdRunError = Exception("subprocess command execution failed")
+from qemu.helpers.exceptions import *
+#
+# FileNotFound = Exception("File Not Found")
+# InvalidOSType = Exception("Invalid OS variant was passed")
+# CmdRunError = Exception("subprocess command execution failed")
 
 class VMXmltodict(object):
     def __init__(self, filename):

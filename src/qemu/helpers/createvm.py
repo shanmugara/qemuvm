@@ -3,6 +3,7 @@ import shutil
 
 from subprocess import check_output, DEVNULL, STDOUT
 from qemu.helpers.common_cls import  Vm, Nic
+from qemu.helpers.exceptions import *
 
 class Create(object):
     def __init__(self,
@@ -13,7 +14,6 @@ class Create(object):
                  winver="2022",
                  ostype="win2k19",
                  img_dir="/kvm/nas",
-                 img_src="wind2k22-gui.qcow2",
                  diskbus="virtio"
                  ):
         self.vm = Vm()
@@ -25,11 +25,21 @@ class Create(object):
         self.winmode = winmode
         self.winver = winver
         self.img_dir = img_dir
-        self.src_img = os.path.join(self.img_dir, img_src)
-        self.dst_img = os.path.join(self.img_dir, f"{self.vm.name}.qcpow2")
+
+        if winmode == "core":
+            self.src_img = os.path.join(self.img_dir, "win2k22-core.qcow2")
+        elif winmode == "gui":
+            self.src_img = os.path.join(self.img_dir, "win2k22-gui.qcow2")
+        else:
+            raise BadWinMode
 
         if not os.path.isfile(self.src_img):
             raise FileNotFoundError(f"File:{self.src_img}")
+
+        self.dst_img = os.path.join(self.img_dir, f"{self.vm.name}.qcpow2")
+
+        if os.path.isfile(self.dst_img):
+            raise DestImageExists
     def setnetwork(self):
         nic = Nic()
         nic.type = "virtio"
