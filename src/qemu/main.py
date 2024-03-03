@@ -20,6 +20,7 @@ def main():
     parse_create = sub_parser.add_parser("create", help="create a new vm from image")
     parse_create.add_argument("-n", "--vmname", help="vm name", required=True, type=str)
     parse_create.add_argument("-i", "--winmode", help="windows server mode core or gui", default="core", required=False)
+    parse_create.add_argument("--imgdir", help="kvm image directory", required=False, default="/kvm/nas", type=str)
 
     args = parser.parse_args()
 
@@ -29,7 +30,7 @@ def main():
         importer.commmit()
 
     if args.command == "create":
-        creater = createvm.Create(args.vmname, args.winmode)
+        creater = createvm.Create(args.vmname, args.winmode, img_dir=args.imgdir)
         creater.commit()
 
 if __name__ == "__main__":
