@@ -1,9 +1,12 @@
 import json
+import os.path
 
 import xmltodict
 from subprocess import check_output, DEVNULL, STDOUT
 
-
+FileNotFound = Exception("File Not Found")
+InvalidOSType = Exception("Invalid OS variant was passed")
+CmdRunError = Exception("subprocess command execution failed")
 class Vm(object):
     def __init__(self):
         self.name = ""
@@ -31,12 +34,19 @@ class VMXmltodict(object):
 
 class Import(object):
     def __init__(self, filename, diskimg, ostype):
-        self.srcxml = filename
-        self.disk = diskimg
+
         self.ostypes = ["centos7", "centos7.0", "ubuntubionic", "ubuntufocal", "win2k12r2", "win2k19", "win2k16"]
+
+        for f in [filename, diskimg]:
+            if not os.path.isfile(f):
+                raise FileNotFound
+
         if ostype not in self.ostypes:
             print(f"invalid os type, msut be one of {self.ostypes}")
-            raise
+            raise InvalidOSType
+
+        self.srcxml = filename
+        self.disk = diskimg
         self.ostype = ostype
 
     def startimport(self):
@@ -98,8 +108,4 @@ class Import(object):
             print(cmd_out)
         except Exception as e:
             print(f"error {e}")
-            raise e
-
-
-
-
+            raise CmdRunError
