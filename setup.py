@@ -8,7 +8,7 @@ req_lst = ['xmltodict']
 if os.name == 'nt':
     req_lst.append('colorama')
 
-setup(name='azuregraph',
+setup(name='qemuutils',
       version="0.0.1",
       description='QEMU Utils.',
       url='https://none.none',
