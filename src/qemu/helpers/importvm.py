@@ -3,7 +3,7 @@ import os.path
 
 import xmltodict
 from subprocess import check_output, DEVNULL, STDOUT
-from common_cls import Vm, Nic
+from qemu.helpers.common_cls import Vm, Nic
 
 FileNotFound = Exception("File Not Found")
 InvalidOSType = Exception("Invalid OS variant was passed")
