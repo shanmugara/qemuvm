@@ -18,7 +18,7 @@ def main():
     parse_import.add_argument("-o", "--osvariant", help="os variant of the vm", required=True, type=str)
 
     parse_create = sub_parser.add_parser("create", help="create a new vm from image")
-    parse_create.add_argument("-n", "--vmnane", help="vm name", required=True, type=str)
+    parse_create.add_argument("-n", "--vmname", help="vm name", required=True, type=str)
     parse_create.add_argument("-i", "--winmode", help="windows server mode core or gui", default="core", required=False)
 
     args = parser.parse_args()
