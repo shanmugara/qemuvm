@@ -46,7 +46,7 @@ class Import(object):
         self.vm.ostype = self.ostype
         self.vm.name = self.xd.vmdict['domain']['name']
         self.vm.cpus = self.xd.vmdict['domain']['vcpu']['#text']
-        self.vm.memory = self.xd.vmdict['domain']['memory']['#text']
+        self.vm.memory = f"{self.xd.vmdict['domain']['memory']['#text']}KiB"
 
         self.getnics()
         self.getbus()
