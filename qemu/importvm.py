@@ -53,7 +53,7 @@ class Import(object):
         self.getnetworks()
         self.getgraphics()
         # create the virt-install command
-        self.cmd = (f"virt-install --name {self.vm.name} --ram {self.vm.memory} --vcpus {self.vm.cpus} "
+        self.cmd = (f"sudo virt-install --name {self.vm.name} --ram {self.vm.memory} --vcpus {self.vm.cpus} "
                     f"--os-type {self.vm.ostype} --disk {self.vm.disk},bus={self.vm.diskbus} {self.interfaces} "
                     f"{self.graphics} --import --noautoconsole")
 
