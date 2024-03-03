@@ -2,7 +2,7 @@ import os
 import shutil
 
 from subprocess import check_output, DEVNULL, STDOUT
-from common_cls import Vm, Nic
+from qemu.helpers.common_cls import  Vm, Nic
 
 class Create(object):
     def __init__(self,
